@@ -1,3 +1,4 @@
+using System.Text.Json;
 using Amazon.SimpleSystemsManagement;
 using Amazon.SimpleSystemsManagement.Model;
 using Microsoft.Extensions.Configuration;
@@ -63,7 +64,7 @@ public class ParameterStoreProcessor : IParameterStoreProcessor
                     result[GetKey(pair.Key, basePath)] = pair.Value;
                 }
             }
-            catch (Exception)
+            catch (Exception exception) when (exception is JsonException or FormatException)
             {
                 result[GetKey(name, basePath)] = value;
             }

@@ -5,6 +5,10 @@
     <Authors>Spirantis</Authors>
     <Company>Spirantis</Company>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <RepositoryUrl>https://github.com/Spirantis/Spirantis.Extensions</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageProjectUrl>https://github.com/Spirantis/Spirantis.Extensions</PackageProjectUrl>
   </PropertyGroup>
   <PropertyGroup>
     <IncludeSymbols>true</IncludeSymbols>

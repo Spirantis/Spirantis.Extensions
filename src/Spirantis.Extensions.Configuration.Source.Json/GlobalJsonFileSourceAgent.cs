@@ -38,22 +38,19 @@ public class GlobalJsonFileSourceAgent : IConfigurationSourceAgent
     /// <summary>Whether the file is reloaded on change. Defaults to <see langword="true"/>.</summary>
     public bool ReloadOnChange { get; set; } = true;
 
-    private PhysicalFileProvider SystemConfigurationFileProvider
+    private PhysicalFileProvider CreateSystemConfigurationFileProvider()
     {
-        get
+        foreach (string relativePath in RelativeConfigurationPaths)
         {
-            foreach (string relativePath in RelativeConfigurationPaths)
+            string absolutePath = Path.GetFullPath(relativePath);
+
+            if (Directory.Exists(absolutePath))
             {
-                string absolutePath = Path.GetFullPath(relativePath);
-
-                if (Directory.Exists(absolutePath))
-                {
-                    return new PhysicalFileProvider(absolutePath);
-                }
+                return new PhysicalFileProvider(absolutePath);
             }
-
-            throw new DirectoryNotFoundException("Configuration directory not found");
         }
+
+        throw new DirectoryNotFoundException("Configuration directory not found");
     }
 
     /// <inheritdoc />
@@ -65,7 +62,7 @@ public class GlobalJsonFileSourceAgent : IConfigurationSourceAgent
         if (environmentConfiguration.GetValue(EnableEnvironmentKey, false))
         {
             builder.AddJsonFile(
-                SystemConfigurationFileProvider,
+                CreateSystemConfigurationFileProvider(),
                 $"{FileName}.json",
                 IsOptional,
                 ReloadOnChange

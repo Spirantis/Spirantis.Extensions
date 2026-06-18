@@ -4,7 +4,6 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <IsPackable>false</IsPackable>
-    <EnforceCodeStyleInBuild>false</EnforceCodeStyleInBuild>
     <RootNamespace>Spirantis.Extensions.SystemTests</RootNamespace>
     <NoWarn>$(NoWarn);CA1062</NoWarn>
   </PropertyGroup>

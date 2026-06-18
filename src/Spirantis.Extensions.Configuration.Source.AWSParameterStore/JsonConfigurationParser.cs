@@ -12,18 +12,10 @@ namespace Spirantis.Extensions.Configuration.Source.AWSParameterStore;
 internal sealed class JsonConfigurationParser
 {
     private readonly SortedDictionary<string, string?> data = new(StringComparer.OrdinalIgnoreCase);
-    private readonly Stack<string> context = new();
-    private string currentPath;
-
-    private JsonConfigurationParser(string basePath)
-    {
-        currentPath = basePath;
-        context.Push(basePath);
-    }
 
     public static IDictionary<string, string?> Parse(string input, string basePath)
     {
-        var parser = new JsonConfigurationParser(basePath);
+        var parser = new JsonConfigurationParser();
 
         using var document = JsonDocument.Parse(
             input,
@@ -34,21 +26,19 @@ internal sealed class JsonConfigurationParser
             }
         );
 
-        parser.VisitElement(document.RootElement);
+        parser.VisitElement(document.RootElement, basePath);
 
         return parser.data;
     }
 
-    private void VisitElement(JsonElement element)
+    private void VisitElement(JsonElement element, string path)
     {
         switch (element.ValueKind)
         {
             case JsonValueKind.Object:
                 foreach (var property in element.EnumerateObject())
                 {
-                    EnterContext(property.Name);
-                    VisitElement(property.Value);
-                    ExitContext();
+                    VisitElement(property.Value, ConfigurationPath.Combine(path, property.Name));
                 }
 
                 break;
@@ -57,9 +47,8 @@ internal sealed class JsonConfigurationParser
                 int index = 0;
                 foreach (var item in element.EnumerateArray())
                 {
-                    EnterContext(index.ToString(CultureInfo.InvariantCulture));
-                    VisitElement(item);
-                    ExitContext();
+                    string key = index.ToString(CultureInfo.InvariantCulture);
+                    VisitElement(item, ConfigurationPath.Combine(path, key));
                     index++;
                 }
 
@@ -70,21 +59,17 @@ internal sealed class JsonConfigurationParser
             case JsonValueKind.True:
             case JsonValueKind.False:
             case JsonValueKind.Null:
-                VisitPrimitive(element);
+                if (!data.TryAdd(path, GetValue(element)))
+                {
+                    throw new FormatException($"A duplicate key '{path}' was found.");
+                }
+
                 break;
 
             default:
                 throw new FormatException(
-                    $"Unsupported JSON token '{element.ValueKind}' was found at '{currentPath}'."
+                    $"Unsupported JSON token '{element.ValueKind}' was found at '{path}'."
                 );
-        }
-    }
-
-    private void VisitPrimitive(JsonElement element)
-    {
-        if (!data.TryAdd(currentPath, GetValue(element)))
-        {
-            throw new FormatException($"A duplicate key '{currentPath}' was found.");
         }
     }
 
@@ -97,16 +82,4 @@ internal sealed class JsonConfigurationParser
             JsonValueKind.False => bool.FalseString,
             _ => element.GetRawText(),
         };
-
-    private void EnterContext(string name)
-    {
-        context.Push(name);
-        currentPath = ConfigurationPath.Combine(context.Reverse());
-    }
-
-    private void ExitContext()
-    {
-        context.Pop();
-        currentPath = ConfigurationPath.Combine(context.Reverse());
-    }
 }

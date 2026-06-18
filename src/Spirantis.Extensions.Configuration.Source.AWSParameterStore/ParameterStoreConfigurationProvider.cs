@@ -56,37 +56,6 @@ public class ParameterStoreConfigurationProvider : ConfigurationProvider
     /// <inheritdoc />
     public override void Load() => LoadAsync(false).ConfigureAwait(false).GetAwaiter().GetResult();
 
-    private static bool CompareDictionaries<TKey, TValue>(
-        IDictionary<TKey, TValue> first,
-        IDictionary<TKey, TValue> second
-    )
-    {
-        if (ReferenceEquals(first, second))
-        {
-            return true;
-        }
-
-        if (first.Count != second.Count)
-        {
-            return false;
-        }
-
-        foreach (var pair in first)
-        {
-            if (!second.TryGetValue(pair.Key, out var secondValue))
-            {
-                return false;
-            }
-
-            if (!EqualityComparer<TValue>.Default.Equals(pair.Value, secondValue))
-            {
-                return false;
-            }
-        }
-
-        return true;
-    }
-
     // When a reload fails and no OnLoadException handler is set, the exception is ignored.
     private async Task LoadAsync(bool reload)
     {
@@ -96,7 +65,13 @@ public class ParameterStoreConfigurationProvider : ConfigurationProvider
                 await Processor.GetDataAsync().ConfigureAwait(false)
                 ?? new Dictionary<string, string?>();
 
-            if (!CompareDictionaries(Data, newData))
+            bool unchanged =
+                Data.Count == newData.Count
+                && newData.All(pair =>
+                    Data.TryGetValue(pair.Key, out var existing) && existing == pair.Value
+                );
+
+            if (!unchanged)
             {
                 Data = newData;
                 OnReload();

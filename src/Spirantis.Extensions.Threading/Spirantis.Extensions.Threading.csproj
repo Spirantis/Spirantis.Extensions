@@ -4,10 +4,6 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <RepositoryUrl>https://github.com/Spirantis/Spirantis.Extensions</RepositoryUrl>
-    <RepositoryType>git</RepositoryType>
-    <PackageProjectUrl>https://github.com/Spirantis/Spirantis.Extensions</PackageProjectUrl>
-    <PackageReadmeFile>README.md</PackageReadmeFile>
     <Description>Asynchronous coordination primitives for .NET: FIFO-ordered async semaphores and serial async execution queues, available globally or partitioned per key.</Description>
     <PackageTags>threading;async;semaphore;fifo;concurrency;synchronization;queue;keyed</PackageTags>
   </PropertyGroup>

@@ -3,10 +3,6 @@
     <TargetFramework>net10.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-    <RepositoryUrl>https://github.com/Spirantis/Spirantis.Extensions</RepositoryUrl>
-    <RepositoryType>git</RepositoryType>
-    <PackageProjectUrl>https://github.com/Spirantis/Spirantis.Extensions</PackageProjectUrl>
-    <PackageReadmeFile>README.md</PackageReadmeFile>
     <Description>Lightweight, dependency-free extension methods for common System types: date/time conversions, span-aware string trimming, and reflection-based type discovery.</Description>
     <PackageTags>extensions;system;datetime;string;span;reflection;type</PackageTags>
   </PropertyGroup>
