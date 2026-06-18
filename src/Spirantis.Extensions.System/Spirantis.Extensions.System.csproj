@@ -1,8 +1,5 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net10.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
     <Description>Lightweight, dependency-free extension methods for common System types: date/time conversions, span-aware string trimming, and reflection-based type discovery.</Description>
     <PackageTags>extensions;system;datetime;string;span;reflection;type</PackageTags>
   </PropertyGroup>

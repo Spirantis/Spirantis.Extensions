@@ -7,7 +7,7 @@ namespace Spirantis.Extensions.Configuration.Source.AWSParameterStore;
 /// <summary>
 /// An <see cref="IConfigurationSource"/> backed by AWS Systems Manager Parameter Store.
 /// </summary>
-public class ParameterStoreConfigurationSource : IConfigurationSource
+public sealed class ParameterStoreConfigurationSource : IConfigurationSource
 {
     /// <summary>AWS client options used to create the Systems Management client.</summary>
     public AWSOptions? AwsOptions { get; set; }

@@ -10,7 +10,7 @@ namespace Spirantis.Extensions.Configuration.Source.AWSParameterStore;
 /// Parameter Store for every base path discovered in the environment configuration,
 /// when its enabling environment key is set. All environment keys are configurable.
 /// </summary>
-public class AWSParameterStoreSourceAgent : IConfigurationSourceAgent
+public sealed class AWSParameterStoreSourceAgent : IConfigurationSourceAgent
 {
     /// <summary>Environment key for the optional custom AWS service endpoint.</summary>
     public string AWSEndpointEnvironmentKey { get; set; } = "SPIRANTIS_CONFIG_AWS_ENDPOINT";

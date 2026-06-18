@@ -7,7 +7,7 @@ namespace Spirantis.Extensions.Configuration.Source.AWSParameterStore;
 /// A <see cref="ConfigurationProvider"/> that loads its data from AWS Systems Manager
 /// Parameter Store, with optional periodic reload and exception handling.
 /// </summary>
-public class ParameterStoreConfigurationProvider : ConfigurationProvider
+public sealed class ParameterStoreConfigurationProvider : ConfigurationProvider
 {
     public ParameterStoreConfigurationProvider(ParameterStoreConfigurationSource source)
         : this(source, new ParameterStoreProcessor(source)) { }

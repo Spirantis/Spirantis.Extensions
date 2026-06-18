@@ -1,8 +1,5 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net10.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
     <Description>AWS Systems Manager Parameter Store configuration source for Spirantis.Extensions.Configuration, with recursive loading, JSON flattening, and periodic reload.</Description>
     <PackageTags>extensions;configuration;aws;parameterstore;ssm;settings</PackageTags>
   </PropertyGroup>
@@ -10,8 +7,8 @@
     <None Include="README.md" Pack="true" PackagePath="\" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="AWSSDK.Extensions.NETCore.Setup" Version="4.0.4" />
-    <PackageReference Include="AWSSDK.SimpleSystemsManagement" Version="4.0.8" />
+    <PackageReference Include="AWSSDK.Extensions.NETCore.Setup" />
+    <PackageReference Include="AWSSDK.SimpleSystemsManagement" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Spirantis.Extensions.Configuration\Spirantis.Extensions.Configuration.csproj" />

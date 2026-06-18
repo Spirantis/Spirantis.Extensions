@@ -1,9 +1,5 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net10.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
-    <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <Description>Asynchronous coordination primitives for .NET: FIFO-ordered async semaphores and serial async execution queues, available globally or partitioned per key.</Description>
     <PackageTags>threading;async;semaphore;fifo;concurrency;synchronization;queue;keyed</PackageTags>
   </PropertyGroup>

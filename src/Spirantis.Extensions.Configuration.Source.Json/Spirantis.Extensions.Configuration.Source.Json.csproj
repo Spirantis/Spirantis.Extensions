@@ -1,8 +1,5 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net10.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
     <Description>JSON file configuration source agents for Spirantis.Extensions.Configuration: machine-wide and service-local config.json discovery.</Description>
     <PackageTags>extensions;configuration;json;settings;file</PackageTags>
   </PropertyGroup>
@@ -10,8 +7,8 @@
     <None Include="README.md" Pack="true" PackagePath="\" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="10.0.9" />
-    <PackageReference Include="Microsoft.Extensions.FileProviders.Physical" Version="10.0.9" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" />
+    <PackageReference Include="Microsoft.Extensions.FileProviders.Physical" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Spirantis.Extensions.Configuration\Spirantis.Extensions.Configuration.csproj" />

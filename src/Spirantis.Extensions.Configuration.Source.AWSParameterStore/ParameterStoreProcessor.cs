@@ -9,7 +9,7 @@ namespace Spirantis.Extensions.Configuration.Source.AWSParameterStore;
 /// Default <see cref="IParameterStoreProcessor"/> that queries AWS Systems Manager
 /// Parameter Store recursively, flattening JSON parameter values into configuration keys.
 /// </summary>
-public class ParameterStoreProcessor : IParameterStoreProcessor
+public sealed class ParameterStoreProcessor : IParameterStoreProcessor
 {
     public ParameterStoreProcessor(ParameterStoreConfigurationSource source)
     {

@@ -4,7 +4,7 @@ namespace Spirantis.Extensions.Configuration;
 /// Options controlling how <see cref="ApplicationConfiguration"/> assembles
 /// configuration sources.
 /// </summary>
-public class ConfigurationSourceOptions
+public sealed class ConfigurationSourceOptions
 {
     /// <summary>
     /// The base directory used to resolve relative configuration file paths.

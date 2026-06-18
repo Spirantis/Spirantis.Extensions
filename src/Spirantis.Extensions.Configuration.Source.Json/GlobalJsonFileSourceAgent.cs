@@ -8,7 +8,7 @@ namespace Spirantis.Extensions.Configuration.Source.Json;
 /// configurable list of candidate directories and loading the file from the first
 /// one that exists, when its enabling environment key is set.
 /// </summary>
-public class GlobalJsonFileSourceAgent : IConfigurationSourceAgent
+public sealed class GlobalJsonFileSourceAgent : IConfigurationSourceAgent
 {
     /// <summary>
     /// The environment key that enables this agent. Defaults to

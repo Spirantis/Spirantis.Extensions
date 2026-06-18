@@ -4,7 +4,7 @@ namespace Spirantis.Extensions.Configuration.Source.AWSParameterStore;
 /// Context passed to the load-exception handler of a
 /// <see cref="ParameterStoreConfigurationProvider"/>.
 /// </summary>
-public class ParameterStoreExceptionContext
+public sealed class ParameterStoreExceptionContext
 {
     /// <summary>The exception raised while loading parameters.</summary>
     public Exception? Exception { get; set; }

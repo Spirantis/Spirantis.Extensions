@@ -7,7 +7,7 @@ namespace Spirantis.Extensions.Configuration.Source.Json;
 /// (resolved relative to the configuration builder's base path) when its
 /// enabling environment key is set.
 /// </summary>
-public class ServiceJsonFileSourceAgent : IConfigurationSourceAgent
+public sealed class ServiceJsonFileSourceAgent : IConfigurationSourceAgent
 {
     /// <summary>
     /// The environment key that enables this agent. Defaults to
