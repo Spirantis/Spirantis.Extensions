@@ -1,0 +1,6 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="../Tests.props" />
+  <ItemGroup>
+    <ProjectReference Include="..\Spirantis.Extensions.Logging.Sink.Console\Spirantis.Extensions.Logging.Sink.Console.csproj" />
+  </ItemGroup>
+</Project>

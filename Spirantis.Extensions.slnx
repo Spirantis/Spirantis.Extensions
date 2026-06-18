@@ -22,4 +22,13 @@
     <Project Path="src/Spirantis.Extensions.Configuration.Source.Json/Spirantis.Extensions.Configuration.Source.Json.csproj" />
     <Project Path="src/Spirantis.Extensions.Configuration.Source.Json.Tests/Spirantis.Extensions.Configuration.Source.Json.Tests.csproj" />
   </Folder>
+  <Folder Name="/Logging/">
+    <Project Path="src/Spirantis.Extensions.Logging/Spirantis.Extensions.Logging.csproj" />
+    <Project Path="src/Spirantis.Extensions.Logging.Tests/Spirantis.Extensions.Logging.Tests.csproj" />
+    <Project Path="src/Spirantis.Extensions.Logging.Sink.Console/Spirantis.Extensions.Logging.Sink.Console.csproj" />
+    <Project Path="src/Spirantis.Extensions.Logging.Sink.Console.Tests/Spirantis.Extensions.Logging.Sink.Console.Tests.csproj" />
+    <Project Path="src/Spirantis.Extensions.Logging.Sink.File/Spirantis.Extensions.Logging.Sink.File.csproj" />
+    <Project Path="src/Spirantis.Extensions.Logging.Sink.AWSCloudWatch/Spirantis.Extensions.Logging.Sink.AWSCloudWatch.csproj" />
+    <Project Path="src/Spirantis.Extensions.Logging.Sink.Syslog/Spirantis.Extensions.Logging.Sink.Syslog.csproj" />
+  </Folder>
 </Solution>

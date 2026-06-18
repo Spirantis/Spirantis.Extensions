@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <Description>A local syslog (RFC 5424) logging sink for Spirantis.Extensions.Logging. Linux only.</Description>
+    <PackageTags>extensions;logging;serilog;syslog;linux;sink</PackageTags>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Include="README.md" Pack="true" PackagePath="\" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Serilog.Sinks.SyslogMessages" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Spirantis.Extensions.Logging\Spirantis.Extensions.Logging.csproj" />
+  </ItemGroup>
+</Project>

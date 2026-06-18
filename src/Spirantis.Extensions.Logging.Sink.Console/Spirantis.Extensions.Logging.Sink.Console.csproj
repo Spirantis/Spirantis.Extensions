@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <Description>Console logging sinks for Spirantis.Extensions.Logging: a themed text console sink and a structured JSON console sink.</Description>
+    <PackageTags>extensions;logging;serilog;console;json;sink</PackageTags>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Include="README.md" Pack="true" PackagePath="\" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Serilog.Expressions" />
+    <PackageReference Include="Serilog.Sinks.Console" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Spirantis.Extensions.Logging\Spirantis.Extensions.Logging.csproj" />
+  </ItemGroup>
+</Project>

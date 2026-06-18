@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <Description>A rolling-file logging sink for Spirantis.Extensions.Logging, writing asynchronously with configurable path, encoding, and retention.</Description>
+    <PackageTags>extensions;logging;serilog;file;rolling;sink</PackageTags>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Include="README.md" Pack="true" PackagePath="\" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Serilog.Sinks.Async" />
+    <PackageReference Include="Serilog.Sinks.File" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Spirantis.Extensions.Logging\Spirantis.Extensions.Logging.csproj" />
+  </ItemGroup>
+</Project>

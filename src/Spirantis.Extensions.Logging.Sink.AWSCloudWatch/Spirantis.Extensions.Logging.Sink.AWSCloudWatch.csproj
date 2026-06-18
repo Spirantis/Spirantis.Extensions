@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <Description>An AWS CloudWatch Logs sink for Spirantis.Extensions.Logging, with configurable log group, region, credentials, batching, and retries.</Description>
+    <PackageTags>extensions;logging;serilog;aws;cloudwatch;sink</PackageTags>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Include="README.md" Pack="true" PackagePath="\" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="AWSSDK.CloudWatchLogs" />
+    <PackageReference Include="Serilog.Sinks.AwsCloudWatch" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Spirantis.Extensions.Logging\Spirantis.Extensions.Logging.csproj" />
+  </ItemGroup>
+</Project>
