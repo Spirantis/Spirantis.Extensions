@@ -1,0 +1,129 @@
+# Spirantis.Extensions
+
+A collection of lightweight, dependency-free extension libraries for .NET. Each
+library ships as its own NuGet package so you only take what you need.
+
+| Package | Description |
+| ------- | ----------- |
+| [`Spirantis.Extensions.System`](src/Spirantis.Extensions.System/README.md) | Extension methods for common `System` types — date/time conversions, span-aware string trimming, and reflection-based type discovery. |
+| [`Spirantis.Extensions.Threading`](src/Spirantis.Extensions.Threading/README.md) | Asynchronous coordination primitives — FIFO-ordered async locking and serial execution of async work, globally or partitioned per key. |
+
+All packages target **.NET 10** and are **MIT** licensed.
+
+## Repository layout
+
+```
+Spirantis.Extensions.slnx              # solution tying everything together
+src/
+  .editorconfig                        # shared code style
+  Directory.Build.props                # shared package metadata
+  Spirantis.Extensions.System/         # library + its package README
+  Spirantis.Extensions.System.Tests/
+  Spirantis.Extensions.Threading/      # library + its package README
+  Spirantis.Extensions.Threading.Tests/
+```
+
+## Spirantis.Extensions.System
+
+Extension methods for common `System` types. All extensions live in the `System`
+namespace, so they're available without an extra `using` once the package is
+referenced.
+
+```bash
+dotnet add package Spirantis.Extensions.System
+```
+
+### `DateTime` extensions
+
+```csharp
+DateTime now = DateTime.UtcNow;
+
+// Milliseconds since the Unix epoch (floored)
+double ms = now.ToMillisecondTimestamp();
+
+// Minutes elapsed since midnight (0–1439)
+int minutes = now.ToMinutesSinceMidnight();
+
+// Seconds elapsed since midnight (0–86399)
+int seconds = now.ToSecondsSinceMidnight();
+```
+
+### `string` / `ReadOnlySpan<char>` extensions
+
+Trim a whole substring (not just individual characters) from either end, with a
+configurable `StringComparison`:
+
+```csharp
+"file.txt.txt".TrimEnd(".txt", StringComparison.Ordinal);
+// => "file"
+
+"   prefix-prefix-value".AsSpan()
+    .TrimStart("prefix-", StringComparison.Ordinal);
+// => "value"  (span overload, allocation-free)
+```
+
+Overloads are provided for both `string` (returns `string`) and
+`ReadOnlySpan<char>` (returns `ReadOnlySpan<char>`, no allocation).
+
+### `IEnumerable<Type>` extensions
+
+Find every type that derives from a given base type or open generic, at any depth:
+
+```csharp
+Type[] allTypes = typeof(MyClass).Assembly.GetTypes();
+
+// Non-generic base type (transitive — all descendants)
+IEnumerable<Type> shapes = allTypes.Derives(typeof(Shape));
+
+// Open generic base type (e.g. all types deriving from Repository<T>)
+IEnumerable<Type> repos = allTypes.Derives(typeof(Repository<>));
+```
+
+## Spirantis.Extensions.Threading
+
+Asynchronous coordination primitives that fill gaps in the built-in BCL types.
+
+```bash
+dotnet add package Spirantis.Extensions.Threading
+```
+
+- **`FifoSemaphore`** — an async semaphore that grants entry in strict first-in,
+  first-out order (`SemaphoreSlim` does not guarantee ordering).
+- **`FunctionExecutionQueue`** — runs async actions one at a time, in enqueue order.
+- **`KeyedFifoSemaphore`** — per-key FIFO mutual exclusion; locks on the same key
+  serialize, different keys run concurrently.
+- **`KeyedFunctionExecutionQueue<TKey>`** — a `FunctionExecutionQueue` per key.
+
+See the [package README](src/Spirantis.Extensions.Threading/README.md) for full
+usage examples.
+
+## Building & testing
+
+Build and test the whole solution:
+
+```bash
+dotnet build Spirantis.Extensions.slnx
+dotnet test  Spirantis.Extensions.slnx
+```
+
+Code is formatted with [CSharpier](https://csharpier.com):
+
+```bash
+csharpier format src/
+```
+
+## Publishing
+
+Each library is packed and published to [nuget.org](https://www.nuget.org) as a
+separate package. Shared metadata (version, authors, license, symbol packages)
+lives in `src/Directory.Build.props`; per-package metadata (id, description, tags)
+lives in each project file.
+
+```bash
+dotnet pack src/Spirantis.Extensions.System/Spirantis.Extensions.System.csproj -c Release
+dotnet pack src/Spirantis.Extensions.Threading/Spirantis.Extensions.Threading.csproj -c Release
+```
+
+## License
+
+[MIT](LICENSE)

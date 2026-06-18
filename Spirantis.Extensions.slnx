@@ -1,0 +1,17 @@
+<Solution>
+  <Folder Name="/SolutionItems/">
+    <File Path="README.md" />
+    <File Path="LICENSE" />
+    <File Path=".gitignore" />
+    <File Path="src/.editorconfig" />
+    <File Path="src/Directory.Build.props" />
+  </Folder>
+  <Folder Name="/System/">
+    <Project Path="src/Spirantis.Extensions.System/Spirantis.Extensions.System.csproj" />
+    <Project Path="src/Spirantis.Extensions.System.Tests/Spirantis.Extensions.System.Tests.csproj" />
+  </Folder>
+  <Folder Name="/Threading/">
+    <Project Path="src/Spirantis.Extensions.Threading/Spirantis.Extensions.Threading.csproj" />
+    <Project Path="src/Spirantis.Extensions.Threading.Tests/Spirantis.Extensions.Threading.Tests.csproj" />
+  </Folder>
+</Solution>
