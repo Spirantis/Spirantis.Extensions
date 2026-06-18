@@ -1,9 +1,19 @@
 namespace System;
 
+/// <summary>
+/// Extension methods for discovering derived types within a sequence of <see cref="Type"/> values.
+/// </summary>
 public static class TypeExtensions
 {
     extension(IEnumerable<Type> allTypes)
     {
+        /// <summary>
+        /// Returns every type in the sequence that derives from <paramref name="baseType"/> at any
+        /// depth. Both concrete base types and open generic definitions (e.g. <c>Repository&lt;&gt;</c>)
+        /// are supported.
+        /// </summary>
+        /// <param name="baseType">The base type or open generic definition to match descendants of.</param>
+        /// <returns>The matching derived types, excluding <paramref name="baseType"/> itself.</returns>
         public IEnumerable<Type> Derives(Type baseType)
         {
             ArgumentNullException.ThrowIfNull(baseType);
