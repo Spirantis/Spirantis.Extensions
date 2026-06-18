@@ -3,7 +3,7 @@
     <File Path="README.md" />
     <File Path="LICENSE" />
     <File Path=".gitignore" />
-    <File Path="src/.editorconfig" />
+    <File Path=".gitattributes" />
     <File Path="src/Directory.Build.props" />
   </Folder>
   <Folder Name="/System/">
@@ -13,5 +13,13 @@
   <Folder Name="/Threading/">
     <Project Path="src/Spirantis.Extensions.Threading/Spirantis.Extensions.Threading.csproj" />
     <Project Path="src/Spirantis.Extensions.Threading.Tests/Spirantis.Extensions.Threading.Tests.csproj" />
+  </Folder>
+  <Folder Name="/Configuration/">
+    <Project Path="src/Spirantis.Extensions.Configuration/Spirantis.Extensions.Configuration.csproj" />
+    <Project Path="src/Spirantis.Extensions.Configuration.Tests/Spirantis.Extensions.Configuration.Tests.csproj" />
+    <Project Path="src/Spirantis.Extensions.Configuration.Source.AWSParameterStore/Spirantis.Extensions.Configuration.Source.AWSParameterStore.csproj" />
+    <Project Path="src/Spirantis.Extensions.Configuration.Source.AWSParameterStore.Tests/Spirantis.Extensions.Configuration.Source.AWSParameterStore.Tests.csproj" />
+    <Project Path="src/Spirantis.Extensions.Configuration.Source.Json/Spirantis.Extensions.Configuration.Source.Json.csproj" />
+    <Project Path="src/Spirantis.Extensions.Configuration.Source.Json.Tests/Spirantis.Extensions.Configuration.Source.Json.Tests.csproj" />
   </Folder>
 </Solution>

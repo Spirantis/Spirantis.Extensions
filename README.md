@@ -1,14 +1,19 @@
 # Spirantis.Extensions
 
-A collection of lightweight, dependency-free extension libraries for .NET. Each
-library ships as its own NuGet package so you only take what you need.
+A collection of lightweight extension libraries for .NET. Each library ships as its
+own NuGet package so you only take what you need.
 
 | Package | Description |
 | ------- | ----------- |
 | [`Spirantis.Extensions.System`](src/Spirantis.Extensions.System/README.md) | Extension methods for common `System` types — date/time conversions, span-aware string trimming, and reflection-based type discovery. |
 | [`Spirantis.Extensions.Threading`](src/Spirantis.Extensions.Threading/README.md) | Asynchronous coordination primitives — FIFO-ordered async locking and serial execution of async work, globally or partitioned per key. |
+| [`Spirantis.Extensions.Configuration`](src/Spirantis.Extensions.Configuration/README.md) | Composable application configuration — pluggable source agents layered over environment variables and command-line arguments. |
+| [`Spirantis.Extensions.Configuration.Source.Json`](src/Spirantis.Extensions.Configuration.Source.Json/README.md) | Machine-wide and service-local JSON file configuration sources. |
+| [`Spirantis.Extensions.Configuration.Source.AWSParameterStore`](src/Spirantis.Extensions.Configuration.Source.AWSParameterStore/README.md) | AWS Systems Manager Parameter Store configuration source with recursive loading and JSON flattening. |
 
-All packages target **.NET 10** and are **MIT** licensed.
+All packages target **.NET 10** and are **MIT** licensed. The `System` and `Threading`
+packages are dependency-free; the `Configuration` packages build on
+`Microsoft.Extensions.Configuration` (and the AWS SDK, for the Parameter Store source).
 
 ## Repository layout
 
@@ -21,6 +26,12 @@ src/
   Spirantis.Extensions.System.Tests/
   Spirantis.Extensions.Threading/      # library + its package README
   Spirantis.Extensions.Threading.Tests/
+  Spirantis.Extensions.Configuration/  # core configuration library
+  Spirantis.Extensions.Configuration.Tests/
+  Spirantis.Extensions.Configuration.Source.Json/             # JSON file sources
+  Spirantis.Extensions.Configuration.Source.Json.Tests/
+  Spirantis.Extensions.Configuration.Source.AWSParameterStore/ # AWS Parameter Store source
+  Spirantis.Extensions.Configuration.Source.AWSParameterStore.Tests/
 ```
 
 ## Spirantis.Extensions.System
@@ -97,6 +108,47 @@ dotnet add package Spirantis.Extensions.Threading
 See the [package README](src/Spirantis.Extensions.Threading/README.md) for full
 usage examples.
 
+## Spirantis.Extensions.Configuration
+
+Composable application configuration. `AddConfiguration` layers environment variables
+and command-line arguments, runs a set of pluggable `IConfigurationSourceAgent`
+instances, then re-applies command-line arguments so they take final precedence.
+
+```bash
+dotnet add package Spirantis.Extensions.Configuration
+```
+
+```csharp
+using Microsoft.Extensions.Configuration;
+using Spirantis.Extensions.Configuration;
+
+var configuration = new ConfigurationBuilder()
+    .AddConfiguration(
+        switchMappings: new Dictionary<string, string>(),
+        commandLineArgs: args,
+        options =>
+        {
+            options.ConfigurationSourceAgents.Add(new ServiceJsonFileSourceAgent());
+            options.ConfigurationSourceAgents.Add(new AWSParameterStoreSourceAgent());
+        })
+    .Build();
+```
+
+Two source agent packages are provided:
+
+- **`Spirantis.Extensions.Configuration.Source.Json`** — `ServiceJsonFileSourceAgent`
+  (service-local `config.json`) and `GlobalJsonFileSourceAgent` (machine-wide
+  `config.json` discovered across configurable, origin-neutral search paths).
+- **`Spirantis.Extensions.Configuration.Source.AWSParameterStore`** —
+  `AWSParameterStoreSourceAgent`, loading parameters recursively from AWS Systems
+  Manager Parameter Store and flattening JSON values into configuration keys.
+
+See the package READMEs
+([core](src/Spirantis.Extensions.Configuration/README.md),
+[JSON](src/Spirantis.Extensions.Configuration.Source.Json/README.md),
+[AWS](src/Spirantis.Extensions.Configuration.Source.AWSParameterStore/README.md))
+for full usage details.
+
 ## Building & testing
 
 Build and test the whole solution:
@@ -122,6 +174,9 @@ lives in each project file.
 ```bash
 dotnet pack src/Spirantis.Extensions.System/Spirantis.Extensions.System.csproj -c Release
 dotnet pack src/Spirantis.Extensions.Threading/Spirantis.Extensions.Threading.csproj -c Release
+dotnet pack src/Spirantis.Extensions.Configuration/Spirantis.Extensions.Configuration.csproj -c Release
+dotnet pack src/Spirantis.Extensions.Configuration.Source.Json/Spirantis.Extensions.Configuration.Source.Json.csproj -c Release
+dotnet pack src/Spirantis.Extensions.Configuration.Source.AWSParameterStore/Spirantis.Extensions.Configuration.Source.AWSParameterStore.csproj -c Release
 ```
 
 ## License
