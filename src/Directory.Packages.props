@@ -12,9 +12,9 @@
     <PackageVersion Include="Microsoft.Extensions.FileProviders.Physical" Version="10.0.9" />
   </ItemGroup>
   <ItemGroup Label="AWS">
-    <PackageVersion Include="AWSSDK.Extensions.NETCore.Setup" Version="4.0.4" />
-    <PackageVersion Include="AWSSDK.SimpleSystemsManagement" Version="4.0.8" />
-    <PackageVersion Include="AWSSDK.CloudWatchLogs" Version="4.0.27" />
+    <PackageVersion Include="AWSSDK.Extensions.NETCore.Setup" Version="4.0.4.10" />
+    <PackageVersion Include="AWSSDK.SimpleSystemsManagement" Version="4.0.8.7" />
+    <PackageVersion Include="AWSSDK.CloudWatchLogs" Version="4.0.28" />
   </ItemGroup>
   <ItemGroup Label="Logging">
     <PackageVersion Include="Microsoft.Extensions.Hosting.Abstractions" Version="10.0.9" />
@@ -33,8 +33,8 @@
     <PackageVersion Include="CSharpier.MsBuild" Version="1.3.0" />
   </ItemGroup>
   <ItemGroup Label="Test">
-    <PackageVersion Include="coverlet.collector" Version="10.0.0" />
-    <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="18.4.0" />
+    <PackageVersion Include="coverlet.collector" Version="10.0.1" />
+    <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="18.6.0" />
     <PackageVersion Include="xunit.v3" Version="3.2.2" />
     <PackageVersion Include="xunit.runner.visualstudio" Version="3.1.5" />
   </ItemGroup>
