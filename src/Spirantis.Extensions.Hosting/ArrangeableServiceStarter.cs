@@ -13,6 +13,9 @@ public sealed class ArrangeableServiceStarter : IHostedService
     private readonly IReadOnlyList<IArrangeableHostedService> orderedServices;
     private readonly ILogger<ArrangeableServiceStarter> logger;
 
+    /// <summary>Creates a starter that orders and drives the given arrangeable services.</summary>
+    /// <param name="services">The arrangeable hosted services to order and run.</param>
+    /// <param name="logger">Logger used to report failures encountered while stopping services.</param>
     public ArrangeableServiceStarter(
         IEnumerable<IArrangeableHostedService> services,
         ILogger<ArrangeableServiceStarter> logger
