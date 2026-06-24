@@ -15,6 +15,9 @@ own NuGet package so you only take what you need.
 | [`Spirantis.Extensions.Logging.Sink.File`](src/Spirantis.Extensions.Logging.Sink.File/README.md) | Asynchronous rolling-file logging sink. |
 | [`Spirantis.Extensions.Logging.Sink.AWSCloudWatch`](src/Spirantis.Extensions.Logging.Sink.AWSCloudWatch/README.md) | AWS CloudWatch Logs sink. |
 | [`Spirantis.Extensions.Logging.Sink.Syslog`](src/Spirantis.Extensions.Logging.Sink.Syslog/README.md) | Local syslog (RFC 5424) sink, Linux only. |
+| [`Spirantis.Extensions.DependencyInjection.Autofac`](src/Spirantis.Extensions.DependencyInjection.Autofac/README.md) | Autofac helpers — named `IOptions<T>` registration and per-constructor-parameter named resolution. |
+| [`Spirantis.Extensions.Hosting`](src/Spirantis.Extensions.Hosting/README.md) | Priority-ordered hosted services (Superior/Normal/Inferior tiers), container-agnostic. |
+| [`Spirantis.Extensions.Hosting.Autofac`](src/Spirantis.Extensions.Hosting.Autofac/README.md) | Autofac registration glue for the arrangeable hosted services. |
 
 All packages target **.NET 10** and are **MIT** licensed. The `System` and `Threading`
 packages are dependency-free; the `Configuration` packages build on
@@ -44,6 +47,12 @@ src/
   Spirantis.Extensions.Logging.Sink.File/      # rolling-file sink
   Spirantis.Extensions.Logging.Sink.AWSCloudWatch/ # AWS CloudWatch sink
   Spirantis.Extensions.Logging.Sink.Syslog/    # local syslog sink (Linux)
+  Spirantis.Extensions.DependencyInjection.Autofac/  # Autofac named DI helpers
+  Spirantis.Extensions.DependencyInjection.Autofac.Tests/
+  Spirantis.Extensions.Hosting/                # priority-ordered hosted services
+  Spirantis.Extensions.Hosting.Tests/
+  Spirantis.Extensions.Hosting.Autofac/        # Autofac registration glue
+  Spirantis.Extensions.Hosting.Autofac.Tests/
 ```
 
 ## Spirantis.Extensions.System
@@ -193,6 +202,32 @@ them into the message text.
 
 See the [package README](src/Spirantis.Extensions.Logging/README.md) for full usage details.
 
+## Dependency injection & hosting
+
+`Spirantis.Extensions.DependencyInjection.Autofac` provides Autofac helpers for named
+`IOptions<T>` registration and for wiring a specific named dependency into an individual
+constructor parameter at registration time:
+
+```csharp
+builder.RegisterType<EventPublisher>()
+    .WithParameters(ParameterResolving.CreateResolvedParameter<IMessageProducer>("producer"));
+```
+
+`Spirantis.Extensions.Hosting` adds **priority-ordered hosted services**: declare a tier and
+the services start in order (`Superior` → `Normal` → `Inferior`) and stop in reverse.
+
+```csharp
+public sealed class CacheWarmer() : ArrangeableBackgroundService(HostingArrangement.Superior)
+{
+    protected override Task ExecuteAsync(CancellationToken stoppingToken) => /* ... */;
+}
+
+services.AddArrangeableHostedService<CacheWarmer>();
+```
+
+The core is container-agnostic; `Spirantis.Extensions.Hosting.Autofac` adds
+`ContainerBuilder.RegisterArrangeableHostedService<T>()` for Autofac-based composition.
+
 ## Building & testing
 
 Build and test the whole solution:
@@ -226,6 +261,9 @@ dotnet pack src/Spirantis.Extensions.Logging.Sink.Console/Spirantis.Extensions.L
 dotnet pack src/Spirantis.Extensions.Logging.Sink.File/Spirantis.Extensions.Logging.Sink.File.csproj -c Release
 dotnet pack src/Spirantis.Extensions.Logging.Sink.AWSCloudWatch/Spirantis.Extensions.Logging.Sink.AWSCloudWatch.csproj -c Release
 dotnet pack src/Spirantis.Extensions.Logging.Sink.Syslog/Spirantis.Extensions.Logging.Sink.Syslog.csproj -c Release
+dotnet pack src/Spirantis.Extensions.DependencyInjection.Autofac/Spirantis.Extensions.DependencyInjection.Autofac.csproj -c Release
+dotnet pack src/Spirantis.Extensions.Hosting/Spirantis.Extensions.Hosting.csproj -c Release
+dotnet pack src/Spirantis.Extensions.Hosting.Autofac/Spirantis.Extensions.Hosting.Autofac.csproj -c Release
 ```
 
 ## License

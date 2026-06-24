@@ -1,0 +1,6 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="../Tests.props" />
+  <ItemGroup>
+    <ProjectReference Include="..\Spirantis.Extensions.Hosting.Autofac\Spirantis.Extensions.Hosting.Autofac.csproj" />
+  </ItemGroup>
+</Project>

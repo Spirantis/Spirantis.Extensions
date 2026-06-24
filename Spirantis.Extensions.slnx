@@ -22,6 +22,16 @@
     <Project Path="src/Spirantis.Extensions.Configuration.Source.Json/Spirantis.Extensions.Configuration.Source.Json.csproj" />
     <Project Path="src/Spirantis.Extensions.Configuration.Source.Json.Tests/Spirantis.Extensions.Configuration.Source.Json.Tests.csproj" />
   </Folder>
+  <Folder Name="/DependencyInjection/">
+    <Project Path="src/Spirantis.Extensions.DependencyInjection.Autofac/Spirantis.Extensions.DependencyInjection.Autofac.csproj" />
+    <Project Path="src/Spirantis.Extensions.DependencyInjection.Autofac.Tests/Spirantis.Extensions.DependencyInjection.Autofac.Tests.csproj" />
+  </Folder>
+  <Folder Name="/Hosting/">
+    <Project Path="src/Spirantis.Extensions.Hosting/Spirantis.Extensions.Hosting.csproj" />
+    <Project Path="src/Spirantis.Extensions.Hosting.Tests/Spirantis.Extensions.Hosting.Tests.csproj" />
+    <Project Path="src/Spirantis.Extensions.Hosting.Autofac/Spirantis.Extensions.Hosting.Autofac.csproj" />
+    <Project Path="src/Spirantis.Extensions.Hosting.Autofac.Tests/Spirantis.Extensions.Hosting.Autofac.Tests.csproj" />
+  </Folder>
   <Folder Name="/Logging/">
     <Project Path="src/Spirantis.Extensions.Logging/Spirantis.Extensions.Logging.csproj" />
     <Project Path="src/Spirantis.Extensions.Logging.Tests/Spirantis.Extensions.Logging.Tests.csproj" />

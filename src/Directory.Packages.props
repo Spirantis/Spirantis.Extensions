@@ -29,6 +29,13 @@
     <PackageVersion Include="Serilog.Sinks.File" Version="7.0.0" />
     <PackageVersion Include="Serilog.Sinks.SyslogMessages" Version="4.1.0" />
   </ItemGroup>
+  <ItemGroup Label="DependencyInjection / Hosting">
+    <PackageVersion Include="Autofac" Version="9.3.0" />
+    <PackageVersion Include="Microsoft.Extensions.DependencyInjection" Version="10.0.9" />
+    <PackageVersion Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="10.0.9" />
+    <PackageVersion Include="Microsoft.Extensions.Options" Version="10.0.9" />
+    <PackageVersion Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="10.0.9" />
+  </ItemGroup>
   <ItemGroup Label="Build">
     <PackageVersion Include="CSharpier.MsBuild" Version="1.3.0" />
   </ItemGroup>

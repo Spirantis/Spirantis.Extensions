@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <Description>Autofac registration glue for Spirantis.Extensions.Hosting: register arrangeable hosted services into an Autofac ContainerBuilder.</Description>
+    <PackageTags>extensions;hosting;autofac;hostedservice;ordering</PackageTags>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Include="README.md" Pack="true" PackagePath="\" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Autofac" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Spirantis.Extensions.Hosting\Spirantis.Extensions.Hosting.csproj" />
+  </ItemGroup>
+</Project>
